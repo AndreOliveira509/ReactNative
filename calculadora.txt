@@ -1,0 +1,100 @@
+import React, { useState } from 'react';
+import { View, Text, SafeAreaView, StyleSheet, Pressable, TextInput, Alert, Image } from 'react-native';
+
+const imgsoma = require('assets/images/soma.png');
+const imgmenos = require('assets/images/menos.png');
+const imgmutiplicar = require('assets/images/mutiplicar.png');
+const imgdividir = require('assets/images/dividir.png');
+
+export default function App() {
+  const [num1, gravanum1] = useState('0');
+  const [num2, gravanum2] = useState('0');
+  const [total, gravatotal] = useState(0);
+
+  function subnumeros(){
+    const result = (Number.parseInt(num1) - Number.parseInt(num2));
+    gravatotal(result);
+    Alert.alert('Resultado da Subtração: ' + result);
+  }
+
+  function somarnumeros(){
+    const result = (Number.parseInt(num1) + Number.parseInt(num2));
+    gravatotal(result);
+    Alert.alert('Resultado da Soma: ' + result);
+  }
+
+  function dividirnumeros(){
+    const result = (Number.parseInt(num1) / Number.parseInt(num2));
+    gravatotal(result);
+    Alert.alert('Resultado da Divisão: ' + result);
+  }
+
+  function mutiplicarnumeros(){
+    const result = (Number.parseInt(num1) * Number.parseInt(num2));
+    gravatotal(result);
+    Alert.alert('Resultado da Multiplicação: ' + result);
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+     <Text>Use isso para fazer uma operação com 2 números</Text>
+      <TextInput 
+        style={styles.input}
+        keyboardType="numeric"
+        value={num1}
+        onChangeText={gravanum1}
+      />
+      <TextInput 
+        style={styles.input}
+        keyboardType="numeric"
+        value={num2}
+        onChangeText={gravanum2}
+      />
+      <View style={styles.calc}>
+      <Pressable style={styles.btn} onPress={somarnumeros}>
+        <Image source={imgsoma} style={styles.image}/>
+      </Pressable>
+      <Pressable style={styles.btn} onPress={dividirnumeros}>
+        <Image source={imgdividir} style={styles.image}/>
+      </Pressable>
+      <Pressable style={styles.btn} onPress={mutiplicarnumeros}>
+        <Image source={imgmutiplicar} style={styles.image}/>
+      </Pressable>
+      <Pressable style={styles.btn} onPress={subnumeros}>
+        <Image source={imgmenos} style={styles.image}/>
+      </Pressable>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ecf0f1',
+    padding: 8,
+  },
+  input: {
+    marginTop: 10,
+    width: 200,
+    borderWidth: 1,
+    borderColor: '#000',
+    marginBottom: 10,
+    padding: 8,
+    textAlign: 'center',
+  },
+  btn: {
+    marginVertical: 5,
+    padding: 10,
+  },
+  calc: {
+    flexDirection: 'row',
+    width: '80%',
+  },
+  image: {
+    width: 50,
+    height: 50,
+  },
+});
